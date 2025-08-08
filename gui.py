@@ -129,10 +129,13 @@ class App(tk.Tk):
             msgb.showwarning(message="You must select valid attributes!")
             return None
 
-        handler = FileHandler(int(number), int(size), extension, filePath)
-
-        handler.generateAllFiles()
-        del handler
-        msgb.showinfo(message="Files generated successfully!")
-
-        return None
+        try:
+            handler = FileHandler(int(number), int(size), extension, filePath)
+            handler.generateAllFiles()
+        except:
+            msgb.showerror(message="Could not generate files.")
+        else:
+            del handler
+            msgb.showinfo(message="Files generated successfully!")
+        finally:
+            return None
